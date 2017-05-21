@@ -1,0 +1,16 @@
+gradle:
+  build: ../.
+  dockerfile: docker/Dockerfile
+  privileged: true
+  tty: true
+  volumes:
+    - ../.:/usr/bin/app:rw
+  links:
+    - selenium
+
+selenium:
+  image: selenium/standalone-chrome-debug:latest
+  privileged: true
+  ports:
+    - 4444
+    - 5900

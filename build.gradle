@@ -1,0 +1,41 @@
+group 'SRE'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+configurations {
+    agent
+}
+
+dependencies {
+    agent "org.aspectj:aspectjweaver:1.8.0"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.0.1'
+    testCompile group: 'org.testng', name: 'testng', version: '6.9.13.6'
+    testCompile group: 'com.codeborne', name: 'selenide', version: '4.2'
+    testCompile "ru.yandex.qatools.allure:allure-testng-adaptor:1.4.0"
+}
+
+test.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+test {
+    useTestNG {
+        suites "src/test/testng.xml"
+        useDefaultListeners = true
+    }
+    testLogging.showStandardStreams = true
+    testLogging {
+        events "PASSED", "STARTED", "FAILED", "SKIPPED"
+    }
+    reports.html.enabled = false
+}

@@ -9,8 +9,9 @@ gradle:
     - selenium
 
 selenium:
-  image: selenium/standalone-chrome-debug:latest
-  privileged: true
+  image: selenium/standalone-chrome-debug:lates
+  privileged: false
   ports:
     - 4444
     - 5900
+    - 7543

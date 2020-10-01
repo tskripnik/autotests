@@ -4,6 +4,7 @@
     <test name="autotests">
         <classes>
             <class name="Registration.FieldsValidationCheck"/>
+            <class name="Authorise.IsUserAdmin/>
             <class name="Registration.RegisterUserToTheSystem"/>
             <class name="NotApprovedUser.NotApprovedUserJoinsCompany"/>
         </classes>

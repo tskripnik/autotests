@@ -14,3 +14,17 @@ selenium:
   ports:
     - 4444
     - 5900
+kubernetes:
+  containers:
+  - containerName: sitespeedio
+    image: sitespeedio/sitespeed.io:10.0.2
+  - containerName: docker
+    image: docker:${DOCKER_VERSION}
+  - containerName: helm
+    image: alpine/helm:${HELM_VERSION}
+  - containerName: curl
+    image: appropriate/curl:3.1
+  - containerName: node
+    image: node:14.15
+  - containerName: sonar-scanner
+    image: ciricihq/gitlab-sonar-scanner:3.2.0

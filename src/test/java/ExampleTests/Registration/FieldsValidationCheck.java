@@ -99,6 +99,27 @@ public class FieldsValidationCheck {
         boolean mismatchValidation = RegistrationForm.passAndConfirmPassMismatchValidationDiplayed();
         Assert.assertEquals(true, mismatchValidation);
     }
+    @Test
+    it("self register should be successful", async function () {
+        // Generating random email
+        const email = faker.internet.email(
+            undefined,
+            undefined,
+            "ip-5236.sunline.net.ua"
+        );
+        
+        const resp = await new Users().registerUser(email, email);
+        
+        expect(resp, JSON.stringify(resp))
+            .to.be.an("object")
+            .that.has.all.keys("token", "tokenExpires", "id");
+        expect(resp.token, JSON.stringify(resp)).to.be.a("string").that.is.not
+            .empty;
+        expect(resp.tokenExpires, JSON.stringify(resp)).to.be.a("string").that
+            .is.not.empty;
+        expect(resp.id, JSON.stringify(resp)).to.be.a("string").that.is.not
+            .empty;
+    });
 
     @Test
     public void ShortMismatchPasswordsCheck() throws Exception {

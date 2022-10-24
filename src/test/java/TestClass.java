@@ -24,7 +24,8 @@ public class TestClass {
     @Test
     public void FirstTest() {
         System.out.println("Test run");
-        driver.get("http://dev.sre.pp.ciklum.com/");
+        driver.get("google.com");
+        System.out.println("Test finished");
     }
 
     @AfterClass

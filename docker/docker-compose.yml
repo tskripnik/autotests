@@ -1,3 +1,21 @@
+gradle:
+  build: ../.
+  dockerfile: docker/Dockerfile
+  privileged: true
+  tty: true
+  volumes:
+    - ../.:/usr/bin/app:rw
+  links:
+    - selenium
+
+selenium:
+  image: selenium/standalone-chrome-debug:lates
+  privileged: false
+  ports:
+    - 4444
+    - 5900
+    - 7543
+=======
 version: '3'
 services:
     grafana:

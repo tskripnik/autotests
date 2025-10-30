@@ -1,6 +1,13 @@
 #!/bin/bash
+set -euo pipefail
 
-./bin/stop.sh
+# Stop previous containers if running
+./bin/stop.sh || echo "No running containers to stop."
 
 # Starts Selenium browser and runs Gradle build for the project
-docker-compose -f docker/docker-compose.yml run -d gradle clean test
+echo "Starting Selenium and Gradle tests via Docker Compose..."
+
+docker-compose -f docker/docker-compose.yml up -d selenium
+docker-compose -f docker/docker-compose.yml run --rm gradle clean test
+
+echo "✅ Tests completed successfully."

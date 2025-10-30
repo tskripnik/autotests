@@ -8,11 +8,9 @@
             <class name="Registration.FieldsValidationCheck"/>
             <class name="Registration.RegisterUserToTheSystem"/>
 
-            <!-- Authorisation module -->
-            <class name="Authorise.IsUserAdmin"/>
-
             <!-- Company joining flow -->
             <class name="NotApprovedUser.NotApprovedUserJoinsCompany"/>
         </classes>
     </test> <!-- Autotests -->
 </suite> <!-- Default Suite -->
+

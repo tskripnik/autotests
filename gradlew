@@ -84,23 +84,26 @@ else
     JAVACMD="java"
     which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
 
-Please set the JAVA_HOME variable in your environment to match the
-location of your Java installation."
+# Ensure JAVA_HOME is set
+if [ -z "$JAVA_HOME" ]; then
+    echo "ERROR: JAVA_HOME is not set and could not be determined automatically." >&2
+    echo "Please set the JAVA_HOME variable in your environment to match the" >&2
+    echo "location of your Java installation." >&2
+    exit 1
 fi
 
 # Increase the maximum file descriptors if we can.
-if [ "$cygwin" = "false" -a "$darwin" = "false" -a "$nonstop" = "false" ] ; then
-    MAX_FD_LIMIT=`ulimit -H -n`
-    if [ $? -eq 0 ] ; then
-        if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
+if [ "$cygwin" = "false" ] && [ "$darwin" = "false" ] && [ "$nonstop" = "false" ]; then
+    MAX_FD_LIMIT=$(ulimit -H -n 2>/dev/null)
+    if [ $? -eq 0 ] && [ -n "$MAX_FD_LIMIT" ]; then
+        if [ "$MAX_FD" = "maximum" ] || [ "$MAX_FD" = "max" ]; then
             MAX_FD="$MAX_FD_LIMIT"
         fi
-        ulimit -n $MAX_FD
-        if [ $? -ne 0 ] ; then
+        if ! ulimit -n "$MAX_FD" 2>/dev/null; then
             warn "Could not set maximum file descriptor limit: $MAX_FD"
         fi
     else
-        warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
+        warn "Could not query maximum file descriptor limit (ulimit -H -n failed)"
     fi
 fi
 

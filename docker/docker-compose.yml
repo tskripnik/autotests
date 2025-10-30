@@ -5,16 +5,16 @@ gradle:
   tty: true
   volumes:
     - ../.:/usr/bin/app:rw
-  links:
+  depends_on:
     - selenium
 
 selenium:
-  image: selenium/standalone-chrome-debug:lates
+  image: selenium/standalone-chrome-debug:4.23.0
   privileged: false
   ports:
-    - 4444
-    - 5900
-    - 7543
+    - "4444:4444"
+    - "5900:5900"
+    - "7543:7543"
 =======
 version: '3'
 services:
@@ -59,7 +59,7 @@ services:
         # - /absolute/path/to/graphite/conf/carbon.conf:/opt/graphite/conf/carbon.conf
     grafana-setup:
       image: sitespeedio/grafana-bootstrap:24.5.0
-      links:
+      depends_on:
         - grafana
       environment:
         - GF_PASSWORD=hdeAga76VG6ga7plZ1
@@ -67,3 +67,4 @@ services:
 volumes:
     grafana:
     whisper:
+

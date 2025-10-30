@@ -1,20 +1,24 @@
-@if "%DEBUG%" == "" @echo off
+@if "%DEBUG%"=="" @echo off
 @rem ##########################################################################
 @rem
 @rem  Gradle startup script for Windows
 @rem
 @rem ##########################################################################
 
-@rem Set local scope for the variables with windows NT shell
+@rem Set local scope for the variables with Windows NT shell
 if "%OS%"=="Windows_NT" setlocal
 
-set DIRNAME=%~dp0
-if "%DIRNAME%" == "" set DIRNAME=.
-set APP_BASE_NAME=%~n0
-set APP_HOME=%DIRNAME%
+set "DIRNAME=%~dp0"
+if "%DIRNAME%"=="" set "DIRNAME=."
+set "APP_BASE_NAME=%~n0"
+set "APP_HOME=%DIRNAME%"
+
+@rem Normalize APP_HOME to a fully qualified path (handles "." and spaces)
+for %%i in ("%APP_HOME%") do set "APP_HOME=%%~fi"
 
 @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-set DEFAULT_JVM_OPTS=
+@rem Sensible defaults for CI/dev: moderate heap + UTF-8 to avoid encoding issues.
+if not defined DEFAULT_JVM_OPTS set "DEFAULT_JVM_OPTS=-Xms256m -Xmx512m -Dfile.encoding=UTF-8"
 
 @rem Find java.exe
 if defined JAVA_HOME goto findJavaFromJavaHome
@@ -88,3 +92,4 @@ exit /b 1
 if "%OS%"=="Windows_NT" endlocal
 
 :omega
+
